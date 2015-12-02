@@ -33,3 +33,25 @@ public class code3 {
 		
 	}
 }
+
+
+
+
+
+
+
+
+var html = document.getElementsByTagName('pre')[0];
+var input = html.innerHTML;
+var x = input.split(/\n/);
+var i;
+var z;
+
+for (i = 0; i < x.length; i++){
+z = x[i].split(“x”);
+z[0]
+
+}
+
+
+
