@@ -44,14 +44,26 @@ public class code3 {
 var html = document.getElementsByTagName('pre')[0];
 var input = html.innerHTML;
 var x = input.split(/\n/);
-var i;
+var y;
+var n = 0;
+var i = 0;
 var z;
+var total;
 
-for (i = 0; i < x.length; i++){
-z = x[i].split(“x”);
-z[0]
-
+while (i<x.length){
+y = x[i].split(“x”);
+while (n < z.length){
+	z[i] = parseInt(y[i]);
 }
-
+total = total + 2(z[0]*z[1]) + 2(z[1]*z[2]) + 2(z[2]*z[0]);
+if (z[0] < z[2] && z[1] < z[2]){
+	total = total + (z[0]*z[1]);
+	} else if(z[1] < z[0] && z[2] < z[0]){
+	total = total + (z[1]*z[2]);
+	} else if(z[2] < z[1] && z[0] < z[1]){
+	total= total + (z[2]*z[0]);
+	}
+	i++;
+}
 
 
