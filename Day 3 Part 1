@@ -1,0 +1,15 @@
+var html = document.getElementsByTagName('pre')[0];
+var input = html.innerHTML;
+var a = 0;
+var z = [];
+while(a < input.length){
+  if(input.charAt(a) == "&gt"){
+    z[a] = ">";
+  } else if(input.charAt(a) == "&lt"){
+    z[a] = "<";
+  } else {
+   z[a] = input.charAt(a);
+  }
+
+}
+console.log(z);
