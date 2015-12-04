@@ -1,0 +1,13 @@
+var html = document.getElementsByTagName('pre')[0];
+var input = html.innerHTML;
+var x = input.split('\n');
+var i = 0;
+var z = [];
+var totalx = 0;
+//var total;
+
+function math(){
+	
+}
+while (i < x.length -1){y = x[i].split("x"); totalx = math(y[0], y[1], y[2], totalx); i++;}
+console.log(totalx);
