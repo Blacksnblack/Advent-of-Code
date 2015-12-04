@@ -5,7 +5,7 @@ var ypos = 0;
 var pos = [];
 var inp = input.split("");
 
-while(a < inp.length) {
+while(a <= inp.length) {
   if (inp[a] == '^'){
     ypos += 1;
   } else if (inp[a] == 'v'){
@@ -15,16 +15,17 @@ while(a < inp.length) {
   } else if (inp[a] == '<'){
     xpos -= 1;
   }
-  
   pos[a] = xpos + "," + ypos;
-  
   a++;
 }
+var uniq = pos.reduce(function(a,b){
+if (a.indexOf(b) <= 0 ) a.push(b);
+return a;
+},[]);
+
+console.log(uniq.length);
 
 
-console.log(pos);
 
 
 
-
-var uniq = total.reduce(function(a,b){if (a.indexOf(b) < 0 ) a.push(b); return a;},[]);
