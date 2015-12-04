@@ -12,13 +12,13 @@ function math(y1, y2, y3, totalx){
 		z[1] = parseInt(y2);
 		z[2] = parseInt(y3);
 		total += (2 * z[0] * z[1]) + (2 * z[1] * z[2]) + (2 * z[2] * z[0]);
-		if (z[0] < z[2] && z[1] < z[2]){total += (z[0] * z[1]);
-		} else if(z[1] < z[0] && z[2] < z[0]){
+		if (z[0] <= z[2] && z[1] < z[2]){total += (z[0] * z[1]);
+		} else if(z[1] <= z[0] && z[2] < z[0]){
 		total += (z[1] * z[2]);
-		} else if(z[2] < z[1] && z[0] < z[1]){
+		} else if(z[2] <= z[1] && z[0] < z[1]){
 		total += (z[2] * z[0]);}
 		console.log(total + " " + i);
 		return total;
 }
-while (i < x.length - 1){y = x[i].split("x"); totalx = math(y[0], y[1], y[2], totalx); i++;}
+while (i < x.length -1){y = x[i].split("x"); totalx = math(y[0], y[1], y[2], totalx); i++;}
 console.log(totalx);
