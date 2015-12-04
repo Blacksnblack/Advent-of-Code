@@ -42,22 +42,18 @@ if (a.indexOf(b) <= 0 ) a.push(b);
 return a;
 },[]);
 
-var uniq = pos.reduce(function(a,b){
-if (a.indexOf(b) <= 0 ) a.push(b);
-return a;
+var uniq = pos.reduce(function(g,h){
+if (g.indexOf(h) <= 0 ) g.push(h);
+return g;
 },[]);
 
 var uniq3 = uniq.concat(uniq2);
 
-var answer = uniq3.reduce(function(a,b){
-if (a.indexOf(b) <= 0 ) a.push(b);
-return a;
+var answer = uniq3.reduce(function(c,d){
+if (c.indexOf(d) <= 0 ) c.push(d);
+return c;
 },[]);
 
+answer = answer.filter( function( item, index, inputArray ) {return inputArray.indexOf(item) == index;
 
 console.log(answer.length);
-
-
-
-
-
