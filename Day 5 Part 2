@@ -8,17 +8,16 @@ function pair(stringa){
 var y = stringa.split("");
 var i = 0;
 var arr = [];
-while (i <= y.length) {
+while (i < y.length) {
 	arr.push(y[i] + y[i+1]);
 	i++;
 }
-
 i = 0;
 var k = 0;
 var countera = 0;
-while (i <= arr.length) {
-	k = 0;
-	while (k <= arr.length){
+while (i < arr.length) {
+	k = i + 2;
+	while (k < arr.length){
 	if (arr[k] == arr[i]){
 		countera++;
 	}
@@ -26,7 +25,7 @@ while (i <= arr.length) {
 	}
 	i++;
 }
-if (countera > arr.length){
+if (countera > 0){
 return true;
 } else {
 return false;
@@ -37,9 +36,11 @@ function repeats(stringb){
 var x = stringb.split("");
 var i = 0;
 var counterb = 0;
-while (i <= x.length){
-    if (x[i] == x[i + 2]) {
+while (i < x.length){
+	var l = i + 2
+    if (x[i] == x[l]) {
     counterb++;
+	//console.log(x[i]);
     }
     i++;
 }
