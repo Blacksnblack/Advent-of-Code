@@ -1,1 +1,59 @@
 
+var html = document.getElementsByTagName('pre')[0];
+var input = html.innerHTML;
+var inp = input.split('\n');
+var nice = 0;
+
+
+function vowels(string){
+  var x = string.split("");
+  var counter = 0;
+  var i;
+  for(i = 0; i <= x.length; i++){
+    if (x[i] == "a" || x[i] == "e" || x[i] == "i" || x[i] == "o" || x[i] == "u" ){
+      counter++
+    }
+  }
+  if (counter >= 3) {
+    return true;
+  } else {return false; }
+}
+
+function double(stringa){
+var y = stringa.split("");
+var i = 0;
+var countera = 0;
+while (i < y.length){
+    if (y[i] == y[i + 1]) {
+    countera++;
+    }
+    i++;
+  
+}
+if (countera > 0){
+  return true;
+} else {
+return false;
+}
+}
+
+function notContain(stringb){
+if(stringb.indexOf("ab") == -1 && stringb.indexOf("cd") == -1 && stringb.indexOf("pq") == -1 && stringb.indexOf("xy") == -1 ){
+    return true;
+} else {
+return false;
+}
+}
+var j = 0;
+while (j < inp.length){
+var a1 = vowels(inp[j]);
+var a2 = double(inp[j]);
+var a3 = notContain(inp[j]);
+
+if (a1 == true && a2 == true && a3 == true){
+  nice++;
+}
+j++;
+}
+console.log(nice);
+
