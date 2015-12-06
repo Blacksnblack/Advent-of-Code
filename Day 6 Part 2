@@ -1,0 +1,105 @@
+var html = document.getElementsByTagName('pre')[0];
+var input = html.innerHTML;
+var inp = input.split('\n');
+
+
+//create grid of lights 999 x 999
+var lightsGrid = new Array(1000 * 1000);
+
+
+var i = 0;
+while(i <= 999999){
+  lightsGrid[i] = "off";
+i++;
+}
+
+
+function off(begx, begy, endx, endy, grid){
+	console.log("off");
+	var x = begx;
+	var y = begy * 1000;
+	
+	while(y <= (endy * 1000)) {
+		x = begx;
+		do {
+		grid[x + y] = "off";
+		x++;
+		} while (x <= endx)
+		y += 1000;
+	}
+	return grid;
+}
+
+function on(begx, begy, endx, endy, grid){
+	console.log("on");
+	var x = begx;
+	var y = begy * 1000;
+	
+	while(y <= (endy * 1000)) {
+		x = begx;
+		do {
+		grid[x + y] = "on";
+		x++;
+		} while ( x <= endx)
+		y += 1000;
+	}
+	return grid;
+}
+
+
+
+function toggle(begx, begy, endx, endy, grid) {
+	console.log("toggle");
+	var x = begx;
+	var y = begy * 1000;
+	
+	while(y <= (endy * 1000)) {
+		x = begx;
+		do {
+		if (grid[x + y] == "off") {
+			grid[x + y] = "on";
+		} else if (grid[x + y] == "on") {
+			grid[x + y] = "off";
+		}
+		x++;
+		} while (x <= endx)
+		y += 1000;
+	}
+	return grid;
+}
+
+function count(grid){
+	console.log("count");
+	var i = 0;
+	var counter = 0;
+	 do {
+		if (grid[i] == "on") {
+			//console.log(grid[i]);
+			counter++;
+		}
+		i++;
+	} while (i < grid.length)
+	return counter;
+}
+
+var q = 0;
+while (q < inp.length) {
+  var z = inp[q].split(" ");
+  if (z[0] == "toggle"){
+	var beg = z[1].split(",");
+	var end = z[3].split(",");
+	lightsGrid = toggle(parseInt(beg[0]), parseInt(beg[1]), parseInt(end[0]), parseInt(end[1]), lightsGrid);
+  } else if(z[0] == "turn") {
+    var beg = z[2].split(",");
+    var end = z[4].split(",");  
+    if(z[1] == "on"){
+		lightsGrid = on(parseInt(beg[0]), parseInt(beg[1]), parseInt(end[0]), parseInt(end[1]), lightsGrid);
+    } else if(z[1] == "off"){
+		lightsGrid = off(parseInt(beg[0]), parseInt(beg[1]), parseInt(end[0]), parseInt(end[1]), lightsGrid);
+    }
+  }
+  q++;
+}
+var answer = count(lightsGrid);
+//console.log(answer);
+console.log(lightsGrid);
