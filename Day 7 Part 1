@@ -1,0 +1,30 @@
+var html = document.getElementsByTagName('pre')[0];
+var pageInput = html.innerHTML;
+var lineInp = pageInput.split('\n');
+var i = 0;
+var arr = [["#", "Going", "line#"]]
+while( i < lineInp.length){
+  //var line = lineInp[i].split(' -&gt; ');
+  var line = lineInp[i].split(" ");
+  if (!isNaN(parseInt(line[0])) && line[1] == '-&gt;'){
+    arr.push([parseInt(line[0]), line[2], i]);
+  }
+  i++;
+}
+console.log(arr);
+
+i = 0;
+while (i < (arr.length - 1)){
+  var a = 0;
+  do {
+  var line = lineInp[i].split(" ");
+    if (arr[i][1] == line[0] || arr[i] == line[2]) {
+      
+    }
+  
+  a++;
+  } while (a < lineInp.length)
+
+}
+
+
