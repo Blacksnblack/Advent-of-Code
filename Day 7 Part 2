@@ -104,6 +104,7 @@ var pv = search(endVariable, variables);
 var counterrr = 0;
 i = 0;
 while (i < lineInp.length){
+	variables[22] = "956";
 //while(typeof(values[335]) == "undefined" && counterrr < 50){
 	z = -1;
 	z1 = -1;
@@ -117,7 +118,10 @@ while (i < lineInp.length){
 			z = search(line[2], variables)
 			z1 = (line[0]).toString();
 			//var values = [];
-			values[z] = (z1).toString();
+			if (line[2] == "b") {
+				values[z] = "956";
+			} else {
+			values[z] = (z1).toString();}
 			} else {
 				z = search(line[0], variables);
 				z2 = search(line[2], variables);
