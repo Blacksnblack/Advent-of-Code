@@ -1,0 +1,3 @@
+var html = document.getElementsByTagName('pre')[0];
+var pageInput = html.innerHTML;
+var lineInp = pageInput.split('\n');
