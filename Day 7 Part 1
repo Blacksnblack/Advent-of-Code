@@ -1,93 +1,3 @@
-var html = document.getElementsByTagName('pre')[0];
-var pageInput = html.innerHTML;
-var lineInp = pageInput.split('\n');
-var endVariable = "a";
-
-var variablesTemp = [];
-var i = 0;
-while(i < lineInp.length){
-	var line = lineInp[i].split(" ");
-	if (line.length == 3) {
-		variablesTemp.push(line[2]);
-	} else if (line.length == 4) {
-		variablesTemp.push(line[1]);
-		variablesTemp.push(line[3]);
-	} else if (line.length == 5) {
-		if(isNaN(line[0])) {
-		variablesTemp.push(line[0]);
-		}
-		if(isNaN(line[2])) {
-		variablesTemp.push(line[2]);
-		}
-		if(isNaN(line[4])) {
-		variablesTemp.push(line[4]);
-		}
-	}
-	
-	i++;
-}
-
-//var values = [];
-var variables = variablesTemp.reduce(function(a,b){
-if (a.indexOf(b) <= 0 ) a.push(b);
-return a;
-},[]);
-
-i = 0;
-var z2;
-var z1;
-var z;
-var a = 0;
-while (i <lineInp.length){
-	line = lineInp[i].split(" ");
-	if (line.length == 3) {
-			z = search(line[2], variables)
-			z1 = parseInt(line[0]);
-			var values = [];
-			values[z] = parseInt(z1);
-			a++;
-		} else if (line.length == 4) {
-		a = 0;
-		do {
-			if(line[1] == variables[a] && values[a] != undefined) {
-				z = search(line[3], variables);
-				values[z] = (not(values[a]));
-			}
-			a++;
-		} while (a < variables.length)
-		
-	} else if (line.length == 5){
-		z2 = search(line[4], variables)
-		if (isNaN(line[0]) ) {
-			z = search(line[0], variables);
-		}
-		if (isNaN(line[2])) {
-			z1 = search(line[2], variables);
-		}
-		if (isNaN(line[0]) && isNaN(line[2]) ) {
-			if (line[1] == "AND"){
-				values[z2] = and(values[z], values[z1]);
-			} else if (line[1] == "RSHIFT") {
-				values[z2] = rshift(values[z], values[z1]);
-			} else if (line[1] == "LSHIFT") {
-				values[z2] = lshift(values[z], values[z1]);
-			}
-		} else if (!isNaN(line[0])){
-			values[z2] = and(parseInt(line[0]), z1); 
-		} else if (!isNaN(line[2]) && line[1] == "RSHIFT"){
-			values[z2] = rshift(z, parseInt(line[2])); 
-		} else if (!isNaN(line[2]) && line[1] == "LSHIFT"){
-			values[z2] = lshift(z, parseInt(line[2])); 
-	}
-	
-	
-}
-	i++;
-}
-
-var pv = search(endVariable, variables);
-console.log(values[pv]);
-
 function lshift(num1, num2){
 	return num1 << num2;
 }
@@ -143,3 +53,127 @@ function search (name, array) {
 		i++;
 	}	
 }
+
+
+var html = document.getElementsByTagName('pre')[0];
+var pageInput = html.innerHTML;
+var lineInp = pageInput.split('\n');
+var endVariable = "a";
+var values = [];
+var variablesTemp = [];
+var i = 0;
+
+while(i < lineInp.length){  //creates array of variables
+	var line = lineInp[i].split(" ");
+	if (line.length == 3) {
+		variablesTemp.push(line[2]);
+	} else if (line.length == 4) {
+		variablesTemp.push(line[1]);
+		variablesTemp.push(line[3]);
+	} else if (line.length == 5) {
+		if(isNaN(line[0])) {
+		variablesTemp.push(line[0]);
+		}
+		if(isNaN(line[2])) {
+		variablesTemp.push(line[2]);
+		}
+		if(isNaN(line[4])) {
+		variablesTemp.push(line[4]);
+		}
+	}
+	i++;
+}
+
+//var values = [];
+var variables = variablesTemp.reduce(function(a,b){ //removes dups
+if (a.indexOf(b) <= 0 ) a.push(b);
+return a;
+},[]);
+
+//variables.sort();
+var j = 0;
+while(typeof(values[335]) == "undefined"){
+var temp = 0;
+i = 0;
+var z2;
+var z1;
+var z;
+var a = 0;
+var pv = search(endVariable, variables);
+
+var counterrr = 0;
+i = 0;
+while (i < lineInp.length){
+//while(typeof(values[335]) == "undefined" && counterrr < 50){
+	z = -1;
+	z1 = -1;
+	z2 = -1;
+	line = lineInp[i].split(" ");
+	//console.log(line);
+	//console.log(values);
+	//console.log(values[pv]);
+	if (line.length == 3) {
+		if (!isNaN(line[0])){
+			z = search(line[2], variables)
+			z1 = (line[0]).toString();
+			//var values = [];
+			values[z] = (z1).toString();
+			} else {
+				z = search(line[0], variables);
+				z2 = search(line[2], variables);
+				if(typeof(values[z]) != "undefined"){
+					values[z2] = values[z];
+				}
+			}
+		} else if (line.length == 4) {
+			z1 = search(line[1], variables);
+			if(typeof(values[z1])  != "undefined") {
+				z = search(line[3], variables);
+				values[z] = (not(values[z1])).toString();
+			}
+		
+	} else if (line.length == 5){
+		z2 = search(line[4], variables)
+		if (isNaN(line[0]) ) {
+			z = search(line[0], variables);
+		}
+		if (isNaN(line[2])) {
+			z1 = search(line[2], variables);
+		}
+		if (isNaN(line[0]) && isNaN(line[2]) && typeof(values[z1]) != "undefined" && typeof(values[z]) != "undefined") {
+			if (line[1] == "AND"){
+				values[z2] = (and(values[z], values[z1])).toString();
+			} else if (line[1] == "RSHIFT") {
+				values[z2] = (rshift(values[z], values[z1])).toString();
+			} else if (line[1] == "LSHIFT") {
+				values[z2] = (lshift(values[z], values[z1])).toString();
+			} else if (line[1] ==  "OR"){
+				values[z2] = (values[z] | values[z1]).toString();
+			}
+		} else if (!isNaN(line[0]) && typeof(values[z1])  != "undefined"){
+			values[z2] = (and(parseInt(line[0]), values[z1])).toString(); 
+		} else if (!isNaN(line[2]) && line[1] == "RSHIFT" && typeof(values[z]) != "undefined"){
+			values[z2] = (rshift(values[z], parseInt(line[2]))).toString(); 
+		} else if (!isNaN(line[2]) && line[1] == "LSHIFT" && typeof(values[z]) != "undefined"){
+			values[z2] = (lshift(values[z], parseInt(line[2]))).toString(); 
+	}	
+}
+	i++;
+	/*if (i >= lineInp.length) {
+		i = 0;
+		counterrr++;
+		console.log(counterrr);
+	}*/
+	
+	//console.log(i);
+	//console.log(values);
+	//console.log(values.length);
+}
+
+//j++;
+}
+
+
+console.log(values[pv]);
+console.log(values);
+
