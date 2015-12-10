@@ -2,55 +2,29 @@ var html = document.getElementsByTagName('pre')[0];
 var pageInput = html.innerHTML;
 var lineInp = pageInput.split('\n');
 
+var specialsChars = 0;
+var newCodeChar = 0;
 var codeChar = 0;
 var letters = 0;
 var i = 0;
-while( i < lineInp.length){
+
+while (i < lineInp.length){
 	codeChar += lineInp[i].length;
 	var character = lineInp[i].split("");
-	//var character = lineInp[2].split("");
 	var j = 0;
+	specialsChars = 0;
+	letters = 0;
 	while(j < character.length){
-		if(character[j] == "\\" )  {
-			if(character[(j + 1)] == "x" /*&& character[(j + 2)] >= 0 /*&& character[(j + 2)] <= 7*/) {
-				if (character[(j + 2)].match(/[a-f]/i) || character[(j + 2)].match(/[0-9]/) ) {
-					letters++;
-					j = j + 3;
-				}
-			} else if (character[(j + 1)] == "\\" || character[(j + 1)] == "\""){
-				letters++;
-				j = j + 1;
-			}
-		} else if (character[j].match(/[a-z]/i) ){
-			letters++;
-		} else if (character[j] >= 0 && character[j] <= 9) {
+		if (character[j] == "\\" || character[j] == "\"") {
+			specialsChars++;
+		} else if (character[j].match(/[a-z]/i) || character[j] >= 0){
 			letters++;
 		}
 		j++;
-		console.log(character[j] + " " + letters);
 	}
 	
-	
-	
+	newCodeChar += ((2 * specialsChars) + letters + 2)
+	console.log(lineInp[i] + " " + specialsChars + " " + letters + " " + newCodeChar);
 	i++;
 }
-//letters = letters - lineInp.length;
-//console.log(letters);
-console.log(codeChar - letters);
-
-
-/*var html = document.getElementsByTagName('pre')[0];
-var pageInput = html.innerHTML;
-var lineInp = pageInput.split('\n');
-var i = 0;
-while( i < lineInp.length){	
-	var character = lineInp[i].split("");
-	var j = 0;
-	while(j < character.length){
-		if(character[j] == "\\" && character[(j+1)] == "x" && character[(j + 2)].match(/[g-z]/i) ){
-			console.log(lineInp[i]);
-		}
-		j++;
-	}
-	i++;
-}*/
+console.log(newCodeChar - codeChar - 2);
