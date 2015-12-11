@@ -1,32 +1,32 @@
 function findDis(name, input, besides){
-	istance = 10000;
+	distance = 1000;
 	var towhere = "";
 	var i = 0;
 	while(i < input.length){
 		var inp = input[i].split(" ");
-			if(inp[0] == name && inp[4] * 1< distance && inp[2] != besides){
-				towhere = inp[2];
-				distance = parseInt(inp[4]);
-			} else if (inp[2] == name && inp[4] * 1 < distance && inp[0] != besides) {
-				towhere = inp[0];
-				distance = parseInt(inp[4]);
+		if(inp[0] == name && (inp[4] * 1) < distance && inp[2] != besides){
+			towhere = inp[2];
+			distance = parseInt(inp[4]);
+		} else if (inp[2] == name && inp[4] * 1 < distance && inp[0] != besides) {
+			towhere = inp[0];
+			distance = parseInt(inp[4]);
 			}
 	i++;
-		}
-		return distance;
+	}
+	return distance;
 	}
 
 
 function findWhe(name, input, besides){
-	distance = 10000;
+	distance = 1000;
 	var towhere;
 	var p = 0; 
 	while(p < input.length){
 		var inp = input[p].split(" ");
-		if(inp[0] == name && inp[4] * 1 < distance && inp[2] != besides){
+		if(inp[0] == name && (inp[4] * 1) < distance && inp[2] != besides){
 			towhere = inp[2];
 			distance = inp[4] * 1;
-		} else if (inp[2] == name && inp[4] * 1 < distance && inp[0] != besides) {
+		} else if (inp[2] == name && (inp[4] * 1) < distance && inp[0] != besides) {
 			towhere = inp[0];
 			distance = inp[4] * 1;
 		}
@@ -36,59 +36,36 @@ function findWhe(name, input, besides){
 }
 
 
-
+//findWhe(name[0], lineInp);
 
 var html = document.getElementsByTagName('pre')[0];
 var pageInput = html.innerHTML;
 var lineInp = pageInput.split('\n');
 
 var totalDistance = [];
+var badList = [];
 var names = ["Faerun", "Tristram", "Tambi", "Norrath", "Snowdin", "Straylight", "AlphaCentauri", "Arbre"];
-var lastPlace = "";
-var temp;
-var dis = 10000;
+var dis = 0;
 var toW = "";
-var j = 0;
 
 		
 var i = 0;
 while (i < names.length){
-	
-	dis = 10000;
-	toW = "";
-	j = 0;
-	while(j < lineInp.length){
-		var inp = lineInp[j].split(" ");
-			if(inp[0] == names[i] && inp[4] * 1 < dis){
-				toW = inp[2];
-				dis = inp[4];
-				totalDistance[i] = parseInt(dis);
-			} else if (inp[2] == names[i] && inp[4] * 1 < dis) {
-				toW = inp[0];
-				dis = inp[4];
-				totalDistance[i] = parseInt(dis);
-			}
+	var j = 0;
+	badlist = [];
+	while(j < 8){
+		toW = names[i];
+		dis = findDis(names[i], lineInp, badList);
+		toW = findWhe(toW, lineInp, badList);
+		badList.push(toW);
+		totalDistance[i] = (dis * 1);
 		j++;
-		}
-		temp = toW;
-		lastPlace = name[i];
-		
-		toW = findWhe(toW, lineInp, lastPlace);
-		totalDistance[i] += findDis(toW, lineInp, lastPlace);
-		var k = 0;
-		while (k < 7){
-		
-		lastPlace = temp;
-		temp = toW;
-		toW = findWhe(toW, lineInp, temp)
-		totalDistance[i] += findDis(toW, lineInp, temp);
-		
-		k++;
-		}
-	i++;	
+	}
+	i++;
+	console.log(totalDistance);
 	}
 
-console.log(totalDistance);
+console.log(dis);
 
 
 
