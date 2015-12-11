@@ -1,13 +1,13 @@
 function findDis(name, input, besides){
-	distance = 1000;
+	var distance = 500;
 	var towhere = "";
 	var i = 0;
 	while(i < input.length){
 		var inp = input[i].split(" ");
-		if(inp[0] == name && (inp[4] * 1) < distance && inp[2] != besides){
+		if(inp[0] == name && (inp[4] * 1) < distance && ifBad(inp[2], besides) == false){
 			towhere = inp[2];
 			distance = parseInt(inp[4]);
-		} else if (inp[2] == name && inp[4] * 1 < distance && inp[0] != besides) {
+		} else if (inp[2] == name && inp[4] * 1 < distance && ifBad(inp[0], besides) == false) {
 			towhere = inp[0];
 			distance = parseInt(inp[4]);
 			}
@@ -18,21 +18,37 @@ function findDis(name, input, besides){
 
 
 function findWhe(name, input, besides){
-	distance = 1000;
+	var distance = 500;
 	var towhere;
 	var p = 0; 
 	while(p < input.length){
 		var inp = input[p].split(" ");
-		if(inp[0] == name && (inp[4] * 1) < distance && inp[2] != besides){
+		if(inp[0] == name && (inp[4] * 1) < distance && ifBad(inp[2], besides) == false){
 			towhere = inp[2];
-			distance = inp[4] * 1;
-		} else if (inp[2] == name && (inp[4] * 1) < distance && inp[0] != besides) {
+			distance = (inp[4] * 1);
+		} else if (inp[2] == name && (inp[4] * 1) < distance && ifBad(inp[0], besides) == false) {
 			towhere = inp[0];
-			distance = inp[4] * 1;
+			distance = (inp[4] * 1);
 		}
 	p++;
 	}
 		return towhere;
+}
+
+function ifBad(name, badarray){
+		var i =0;
+		var counter = 0;
+		while (i < badarray.length){
+			if (badarray[i] == name){
+				counter++;
+			}
+			i++;
+		}
+		if (counter <= 0){
+			return false;
+		} else {
+			return true;
+		}
 }
 
 
