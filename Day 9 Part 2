@@ -1,0 +1,110 @@
+function findWhe (name, input, besides){
+	var possibleNames= [];
+	var possibleNumbers= [];
+	var distance;
+	var toWhere;
+	for (var i = 0; i < input.length; i++){
+		var inp = input[i].split(" ");
+		if(inp[0] == name){
+			possibleNames.push(inp[2]);
+			possibleNumbers.push(inp[4]);
+		} else if (inp[2]== name){
+			possibleNames.push(inp[0]);
+			possibleNumbers.push(inp[4]);
+		}
+	}
+	for (var i = 0; i< besides.length; i++){
+		var index = possibleNames.indexOf(besides[i]);
+		if (index >= 0){
+			possibleNames.splice(index, 1);
+			possibleNumbers.splice(index, 1);
+		}
+	}	
+	for (var i = 0; i < possibleNumbers.length; i++){
+		
+		if (typeof(distance) == "undefined"){
+			distance = possibleNumbers[0] * 1;
+			toWhere = possibleNames[0];
+		}
+		
+		if (distance <= (possibleNumbers[i] * 1)){
+			distance = possibleNumbers[i] * 1;
+			toWhere = possibleNames[i];
+		}
+	}
+	return toWhere;
+}
+
+function findDis (name, input, besides){
+	var possibleNames = [];
+	var possibleNumbers = [];
+	var distance;
+	var toWhere;
+	for (var i = 0; i < input.length; i++){
+		var inp = input[i].split(" ");
+		if(inp[0] == name){
+			possibleNames.push(inp[2]);
+			possibleNumbers.push(inp[4]);
+		} else if (inp[2]== name){
+			possibleNames.push(inp[0]);
+			possibleNumbers.push(inp[4]);
+		}
+	}
+	for (var i = 0; i< besides.length; i++){
+		var index = possibleNames.indexOf(besides[i]);
+		if (index >= 0){
+			possibleNames.splice(index, 1);
+			possibleNumbers.splice(index, 1);
+		}
+	}	
+	for (var i = 0; i < possibleNumbers.length; i++){
+		
+		if (typeof(distance) == "undefined"){
+			distance = possibleNumbers[0] * 1;
+			toWhere = possibleNames[0];
+		}
+		
+		if (distance <= (possibleNumbers[i] * 1)){
+			distance = possibleNumbers[i] * 1;
+			toWhere = possibleNames[i];
+		}
+	}
+	console.log(distance);
+	return distance;
+}
+
+
+var html = document.getElementsByTagName('pre')[0];
+var pageInput = html.innerHTML;
+var lineInp = pageInput.split('\n');
+
+var totalDistance = [0, 0, 0, 0, 0, 0, 0, 0];
+
+var names = ["Faerun", "Tristram", "Tambi", "Norrath", "Snowdin", "Straylight", "AlphaCentauri", "Arbre"];
+var dis = 0;
+var toW = "";
+
+		
+var i = 0;
+while (i < names.length){
+	badlist = ["deezNuts"];
+	var j = 0;
+	toW = names[i];
+	var badList = [];
+	while(j < 7){
+		
+		dis = findDis(toW, lineInp, badList);
+		badList.push(toW);
+		toW = findWhe(toW, lineInp, badList);
+		
+		console.log(badList);
+		totalDistance[i] = totalDistance[i] + dis ;
+		j++;
+	}
+	i++;
+	console.log(totalDistance);
+	}
+
+//console.log(dis);
+
+
