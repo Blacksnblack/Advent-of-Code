@@ -1,67 +1,85 @@
-function findDis(name, input, besides){
-  var toWhere;
-  distance = 200;
-  var p = 0;
-  var counter = 0;
-  while(p < input.length){
-    var inp = input[p].split(" ");
-    var i;
-    do {
-      if(inp[0] == besides[i] || inp[2] == besides[i]){
-        counter++;
-      }
-      if(counter >= 1){
-        if(inp[0] == name && (inp[4] * 1) < distance){
-          toWhere = inp[2];
-          var distance = (inp[4] * 1);
-        }else if (inp[2] == name && (inp[4] * 1) < distance) {
-          toWhere = inp[0];
-          var distance = (inp[4] * 1);
-        }
-      }
-      i++;
-    } while(i < besides.length)
-    p++;
-  }
-  return distance;
-  }
+function findWhe (name, input, besides){
+	var possibleNames= [];
+	var possibleNumbers= [];
+	var distance;
+	var toWhere;
+	for (var i = 0; i < input.length; i++){
+		var inp = input[i].split(" ");
+		if(inp[0] == name){
+			possibleNames.push(inp[2]);
+			possibleNumbers.push(inp[4]);
+		} else if (inp[2]== name){
+			possibleNames.push(inp[0]);
+			possibleNumbers.push(inp[4]);
+		}
+	}
+	for (var i = 0; i< besides.length; i++){
+		var index = possibleNames.indexOf(besides[i]);
+		if (index >= 0){
+			possibleNames.splice(index, 1);
+			possibleNumbers.splice(index, 1);
+		}
+	}	
+	for (var i = 0; i < possibleNumbers.length; i++){
+		
+		if (typeof(distance) == "undefined"){
+			distance = possibleNumbers[0] * 1;
+			toWhere = possibleNames[0];
+		}
+		
+		if (distance >= (possibleNumbers[i] * 1)){
+			distance = possibleNumbers[i] * 1;
+			toWhere = possibleNames[i];
+		}
+	}
+	return toWhere;
+}
 
-
-  function findWhe(name, input, besides){
-    var toWhere;
-    distance = 200;
-    var p = 0;
-    var counter = 0;
-    while(p < input.length){
-      var inp = input[p].split(" ");
-      var i;
-      while(i < besides.length){
-        if(inp[0] == besides[i] || inp[2] == besides[i]){
-          counter++;
-        }
-        if(counter >= 1){
-          if(inp[0] == name && (inp[4] * 1) < distance){
-            toWhere = inp[2];
-            var distance = (inp[4] * 1);
-          }else if (inp[2] == name && (inp[4] * 1) < distance) {
-      			toWhere = inp[0];
-      			var distance = (inp[4] * 1);
-      		}
-        }
-        i++;
-      }
-      p++;
-    }
-  	return toWhere;
-  	}
+function findDis (name, input, besides){
+	var possibleNames = [];
+	var possibleNumbers = [];
+	var distance;
+	var toWhere;
+	for (var i = 0; i < input.length; i++){
+		var inp = input[i].split(" ");
+		if(inp[0] == name){
+			possibleNames.push(inp[2]);
+			possibleNumbers.push(inp[4]);
+		} else if (inp[2]== name){
+			possibleNames.push(inp[0]);
+			possibleNumbers.push(inp[4]);
+		}
+	}
+	for (var i = 0; i< besides.length; i++){
+		var index = possibleNames.indexOf(besides[i]);
+		if (index >= 0){
+			possibleNames.splice(index, 1);
+			possibleNumbers.splice(index, 1);
+		}
+	}	
+	for (var i = 0; i < possibleNumbers.length; i++){
+		
+		if (typeof(distance) == "undefined"){
+			distance = possibleNumbers[0] * 1;
+			toWhere = possibleNames[0];
+		}
+		
+		if (distance >= (possibleNumbers[i] * 1)){
+			distance = possibleNumbers[i] * 1;
+			toWhere = possibleNames[i];
+		}
+	}
+	console.log(distance);
+	return distance;
+}
 
 
 var html = document.getElementsByTagName('pre')[0];
 var pageInput = html.innerHTML;
 var lineInp = pageInput.split('\n');
 
-var totalDistance = [];
-var badList = [];
+var totalDistance = [0, 0, 0, 0, 0, 0, 0, 0];
+
 var names = ["Faerun", "Tristram", "Tambi", "Norrath", "Snowdin", "Straylight", "AlphaCentauri", "Arbre"];
 var dis = 0;
 var toW = "";
@@ -69,14 +87,18 @@ var toW = "";
 		
 var i = 0;
 while (i < names.length){
-	var j = 0;
 	badlist = ["deezNuts"];
-	while(j < 8){
-		toW = names[i];
-		dis = findDis(names[i], lineInp, badList);
-		toW = findWhe(toW, lineInp, badList);
+	var j = 0;
+	toW = names[i];
+	var badList = [];
+	while(j < 7){
+		
+		dis = findDis(toW, lineInp, badList);
 		badList.push(toW);
-		totalDistance[i] = (dis * 1);
+		toW = findWhe(toW, lineInp, badList);
+		
+		console.log(badList);
+		totalDistance[i] = totalDistance[i] + dis ;
 		j++;
 	}
 	i++;
@@ -84,6 +106,5 @@ while (i < names.length){
 	}
 
 //console.log(dis);
-
 
 
