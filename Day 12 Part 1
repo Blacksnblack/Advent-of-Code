@@ -1,1 +1,42 @@
+var html = document.getElementsByTagName('pre')[0];
+var pageInput = html.innerHTML;
+var input = pageInput.split("");
+var numbers = [];
+for (var i = 0; i < input.length; i++){
+	if(input[i] == "-"){
+		numbers.push(next(input, i));
+	} else if (parseInt(input[i]) >= 0 ){
+		if (input[i-1] == '\:' || input[i-1] == '\[' || input[i-1] == '\,'){
+		numbers.push(next(input, i));
+		}
+	}	
+}
+console.log(adding(numbers));
 
+function adding(nums){
+	var ans = 0;
+	for (var i = 0; i <nums.length; i++){
+		ans += parseInt(nums[i]);
+	}
+	return ans;
+	
+}
+
+function next(array, pos){
+	var number = array[pos];
+	if (array[pos] == "-"){
+		var starter = pos + 1;
+	} else {
+		var starter = pos + 1;
+	}
+	var counter;
+	var num = true;
+	for (var i = starter; num; i++){
+		if(parseInt(array[i]) >= 0 ||  parseInt(array[i]) <= 0){
+			number += array[i];
+		} else {
+			num = false;
+		}
+	}
+	return number;
+}
