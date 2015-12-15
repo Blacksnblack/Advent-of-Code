@@ -1,0 +1,35 @@
+var input = "1113222113";
+var aa = input;
+var bb = input;
+
+for (var i = 0; i < 50; i++){
+	aa = thang(bb);
+	//console.log(aa);
+	bb = aa;
+	
+}
+console.log(aa.length);
+
+
+function thang(inp){
+	var j = 0;
+	var a = inp[j + 1];
+	var b = inp[j];
+	
+	var number = "";
+	var counter = 1;
+	
+	while (j < inp.length){
+	
+	if(a == b){
+		counter++;
+	} else {
+		number += counter.toString() + b.toString() ;
+		counter = 1;
+	}
+	j++;	
+	a = inp[j + 1];
+	b = inp[j];	
+	}
+	return number;
+}
