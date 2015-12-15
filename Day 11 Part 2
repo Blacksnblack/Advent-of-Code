@@ -1,0 +1,248 @@
+var input = "hepxxyzz";
+var inpp = input.split("");
+var inpNum = numbers(inpp);
+
+var a1 = false;
+var a2 = false;
+var a3 = false;
+
+while(a1 == false || a2 == false || a3 == false){
+	inpNum[inpNum.length - 1]++;
+	inpNum = system(inpNum);
+	a1 = check1(inpNum);
+	if (a1 == true){
+		a2 = check2(inpNum);
+		if (a2 == true){
+			a3 = check3(inpNum);
+		}
+	}	
+}
+
+console.log(numbers(inpNum).join(""));
+
+
+
+function system(nums){
+	for (var i = nums.length; i >= 0; i-- ){
+		if(nums[i] > 26){
+			nums[i] = 1;
+			nums[i-1]++;
+		}
+	}
+	return nums;
+}
+
+function check3(nums){
+	var counter = 0;
+	for (var i = 0; i < nums.length; i++){
+		if(nums[i] == nums[i+1] && nums[i] != nums[i+2]){
+			counter++;
+			i++;
+		} else if	(nums[i] == nums[i+1] && nums[i] == nums[i+2]){
+			counter++;
+			i++;
+		}
+	}
+	if (counter >= 2){
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function check2(nums){
+	var i = 0;
+	var j = i + 1;
+	var k = i + 2;
+	while (k < nums.length) {
+	if (nums[i] + 2 == nums[j] + 1 && nums[i] + 2 == nums[k]){
+		return true;
+	}
+	i++;
+	j = i + 1;
+	k = i + 2;
+	}
+	return false;
+}
+
+function check1(nums){
+	for (var i =0; i < nums.length; i++){
+		if(nums[i] == 9 || nums[i] == 15 || nums[i] == 12){
+			return false;
+		} else {
+			return true;
+		}
+	}	
+}
+
+function numbers(inp){
+	var arr = [];
+	if ((inp[0] * 1) > 0){
+		for (var i = 0; i < inp.length; i++){
+		switch(inp[i]){
+		case 1:
+			arr.push("a");
+			break;
+		case 2:
+			arr.push("b");
+			break;
+		case 3:
+			arr.push("c");
+			break;
+		case 4:
+			arr.push("d");
+			break;
+		case 5:
+			arr.push("e");
+			break;
+		case 6:
+			arr.push("f");
+			break;
+		case 7:
+			arr.push("g");
+			break;			
+		case 8:
+			arr.push("h");
+			break;
+		case 9:
+			arr.push("i");
+			break;
+		case 10:
+			arr.push("j");
+			break;
+		case 11:
+			arr.push("k");
+			break;
+		case 12:
+			arr.push("l"); 
+			break;
+		case 13:
+			arr.push("m");
+			break;
+		case 14:
+			arr.push("n");
+			break;
+		case 15:
+			arr.push("o");
+			break;
+		case 16:
+			arr.push("p");
+			break;
+		case 17:
+			arr.push("q");
+			break;
+		case 18:
+			arr.push("r");
+			break;
+		case 19:
+			arr.push("s");
+			break;
+		case 20:
+			arr.push("t");
+			break;
+		case 21:
+			arr.push("u");
+			break;
+		case 22:
+			arr.push("v");
+			break;
+		case 23:
+			arr.push("w");
+			break;
+		case 24:
+			arr.push("x");
+			break;
+		case 25:
+			arr.push("y");
+			break;
+		case 26:
+			arr.push("z");
+			break;
+			}
+		}
+	} else {
+		for (var i = 0; i < inp.length; i++){	
+		switch(inp[i]){
+		case "a":
+			arr.push(1);
+			break;
+		case "b":
+			arr.push(2);
+			break;
+		case "c":
+			arr.push(3);
+			break;
+		case "d":
+			arr.push(4);
+			break;
+		case "e":
+			arr.push(5);
+			break;
+		case "f":
+			arr.push(6);
+			break;
+		case "g":
+			arr.push(7);
+			break;
+		case "h":
+			arr.push(8);
+			break;
+		case "i":
+			arr.push(9);
+			break;
+		case "j":
+			arr.push(10);
+			break;
+		case "k":
+			arr.push(11);
+			break;
+		case "l":
+			arr.push(12);
+			break;
+		case "m":
+			arr.push(13);
+			break;
+		case "n":
+			arr.push(14);
+			break;
+		case "o":
+			arr.push(15);
+			break;
+		case "p":
+			arr.push(16);
+			break;
+		case "q":
+			arr.push(17);
+			break;
+		case "r":
+			arr.push(18);
+			break;
+		case "s":
+			arr.push(19);
+			break;
+		case "t":
+			arr.push(20);
+			break;
+		case "u":
+			arr.push(21);
+			break;
+		case "v":
+			arr.push(22);
+			break;
+		case "w":
+			arr.push(23);
+			break;
+		case "x":
+			arr.push(24);
+			break;
+		case "y":
+			arr.push(25);
+			break;
+		case "z":
+			arr.push(26);
+			break;
+			}
+		}
+	}
+	return arr;
+}
